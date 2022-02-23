@@ -19,6 +19,7 @@ export const GlobalStyle = createGlobalStyle`
   padding: 0;
   box-sizing: border-box;
   }
+  
 
   body,input,textarea,button{
     font-family: 'Poppins', sans-serif;
@@ -42,5 +43,13 @@ export const GlobalStyle = createGlobalStyle`
       opacity: 0.6;
       cursor: not-allowed;
     }
+
+    html{
+      @media(max-width: 1080px){
+        font-size: 93.75%;
+        @media(max-width: 720px){
+          font-size: 87.5%;
+        }
+      
     
 `;

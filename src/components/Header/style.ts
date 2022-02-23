@@ -5,6 +5,7 @@ export const Container = styled.header`
 `;
 
 export const Content = styled.div`
+position: relative;
   max-width: 1920px;
   margin: 0 auto;
   display: flex;
@@ -12,12 +13,23 @@ export const Content = styled.div`
   align-items: center;
   padding 0 2rem;
   height: 4rem;
+  border-bottom: 1px solid var(--border-color);
 
   }
 `;
 
 export const LogoContainer = styled.div`
 	margin-left: 2rem;
+	&:after {
+		border-right: 1px solid var(--disabled);
+		position: absolute;
+		content: '';
+		bottom: 0px;
+		height: 62px;
+		width: 32px;
+		left: 66px;
+		background-color: transparent;
+	}
 `;
 
 export const Avatar = styled.div`
@@ -29,8 +41,22 @@ export const Avatar = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 50%;
+  
 
-	span {font-size: 0.875rem;
+  &:after{
+    border-left: 1px solid var(--disabled);
+    position: absolute;
+    content: "";
+    bottom: 0px;
+    height: 62px;
+    width: 32px;
+    right: 184px;
+    background-color:transparent;
+
+  }
+
+	span {
+  font-size: 0.875rem;
   display: inline-block;
   font-weight: 400;
   color: var(--text-dark);
@@ -49,13 +75,14 @@ export const ProfileContent = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	text-align: left;
+	height: 1.875rem;
 
 	p {
 		font-size: 0.875rem;
 		font-weight: 600;
 	}
 	span {
-		margin-top: -0.5rem;
+		margin-top: -0.2rem;
 		display: inline-block;
 		font-size: 0.75rem;
 		color: var(--text-light);
