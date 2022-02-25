@@ -38,7 +38,7 @@ export const RolesList = () => {
 						<Text className='roleText'>{role.agents_quantity}</Text>
 					</Td>
 					<Td>
-						<Link href='/role'>
+						<Link href='/role' passHref>
 							<FiMoreVertical />
 						</Link>
 					</Td>
