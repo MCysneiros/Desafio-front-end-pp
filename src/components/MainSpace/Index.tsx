@@ -21,10 +21,14 @@ interface Item {
 	email?: string;
 }
 
+interface GroupRules {
+	role: string;
+	permissions: string[];
+}
 interface RoleData {
 	name: string;
 	department: string;
-	grouprules: Array<string>;
+	grouprules: GroupRules[];
 }
 
 interface AgentData {

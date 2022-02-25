@@ -55,7 +55,7 @@ export default function UserList({ agents }: UserListProps) {
 					</Text>
 				</Td>
 				<Td>
-					<Link href={`/details`}>
+					<Link href={`/details`} passHref>
 						<FiMoreVertical />
 					</Link>
 				</Td>
