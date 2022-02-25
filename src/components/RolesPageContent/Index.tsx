@@ -21,7 +21,6 @@ interface RoleData {
 	department: string;
 	grouprules: GroupRules[];
 }
-
 interface RolePageContent {
 	roleData: RoleData;
 }
