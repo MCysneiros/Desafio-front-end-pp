@@ -5,7 +5,7 @@ import { Container } from './Style';
 interface PersonalItemProps {
 	text: string;
 	data?: string;
-	date?: Date;
+	date?: string;
 }
 
 export default function PersonalInfoItem({

@@ -14,10 +14,8 @@ export const Container = styled.div`
 		justify-content: center;
 		border-radius: 50%;
 		margin-right: 12px;
-		svg {
-			width: 38px;
-			height: 38px;
-			stroke: #587169;
+		img {
+			border-radius: 50%;
 		}
 	}
 	.avatarName {

@@ -4,6 +4,8 @@ import TabsList from '../TabsList/Index';
 import { FiArrowLeft } from 'react-icons/fi';
 import { useRouter } from 'next/router';
 import DetailsPageContent from '../DetailsPageContent/Index';
+import Pagination from '../Pagination/Index';
+import { RolesPageContent } from '../RolesPageContent/Index';
 
 interface Item {
 	agent_id: number;
@@ -13,13 +15,39 @@ interface Item {
 	image: string;
 	role: string;
 	status: string;
+	phone?: { ddd: string; ddi: string; number: string };
+	birth_date?: string;
+	document?: { type: string; number: string };
+	email?: string;
 }
 
+interface RoleData {
+	name: string;
+	department: string;
+	grouprules: Array<string>;
+}
+
+interface AgentData {
+	agent_id: number;
+	name: string;
+	branch: string;
+	department: string;
+	image: string;
+	role: string;
+	status: string;
+	phone: { ddd: string; ddi: string; number: string };
+	birth_date: string;
+	document: { type: string; number: string };
+	email: string;
+}
 interface MainSpaceProps {
 	text: string;
 	hasIcon: boolean;
 	hasTabs: boolean;
-	agents: Item[];
+	agents?: Item[];
+	agentData?: AgentData;
+	roleData?: RoleData;
+	isRoles?: boolean;
 }
 
 export default function MainSpace({
@@ -27,6 +55,9 @@ export default function MainSpace({
 	hasIcon,
 	hasTabs,
 	agents,
+	agentData,
+	roleData,
+	isRoles,
 }: MainSpaceProps) {
 	const router = useRouter();
 
@@ -51,9 +82,18 @@ export default function MainSpace({
 			</TextContainer>
 			<Content>
 				{hasTabs && (
-					<TabsList agents={agents} onFormSubmit={onFormSubmit}></TabsList>
+					<div>
+						<div className='contentOverflow'>
+							<TabsList agents={agents} onFormSubmit={onFormSubmit}></TabsList>
+						</div>
+						<Pagination />
+					</div>
 				)}
-				{text === 'Detalhes do Colaborador' && <DetailsPageContent />}
+				{text === 'Detalhes do Colaborador' && (
+					<DetailsPageContent agentData={agentData} />
+				)}
+
+				{isRoles && <RolesPageContent roleData={roleData} />}
 			</Content>
 		</Container>
 	);

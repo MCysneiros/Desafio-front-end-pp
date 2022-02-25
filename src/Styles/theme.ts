@@ -25,5 +25,6 @@ export const theme = extendTheme({
 				},
 			},
 		},
+		Checkbox: { variants: { line: { color: 'brand.400' } } },
 	},
 });

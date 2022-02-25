@@ -1,15 +1,27 @@
 import OrgDataBar from './OrgDataBar/Index';
 import { Container } from './Style';
 
-export default function OrgData() {
+interface OrgDataProps {
+	role: string;
+	status: string;
+	department: string;
+	branch: string;
+}
+
+export default function OrgData({
+	role,
+	status,
+	department,
+	branch,
+}: OrgDataProps) {
 	return (
 		<Container>
 			<p>Dados organizacionais</p>
 			<div className='gridBox'>
-				<OrgDataBar typeOfBar='Departamento' textOfOrgBar='Comercial' />
-				<OrgDataBar typeOfBar='Cargo' textOfOrgBar='Gerente' />
-				<OrgDataBar typeOfBar='Unidade' textOfOrgBar='Unidade 1' />
-				<OrgDataBar typeOfBar='Status' textOfOrgBar='Ativo' />
+				<OrgDataBar typeOfBar='Departamento' textOfOrgBar={department} />
+				<OrgDataBar typeOfBar='Cargo' textOfOrgBar={role} />
+				<OrgDataBar typeOfBar='Unidade' textOfOrgBar={branch} />
+				<OrgDataBar typeOfBar='Status' textOfOrgBar={status} />
 			</div>
 		</Container>
 	);

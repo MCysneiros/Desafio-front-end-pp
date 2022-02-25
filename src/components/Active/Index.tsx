@@ -1,9 +1,16 @@
 import { Container } from './Style';
 
 interface ActiveProps {
-	status?: 'string';
+	status: string;
 }
 
 export default function Active({ status }: ActiveProps) {
-	return <Container>{status ? 'Ativo' : 'Inativo'}</Container>;
+	const isActive = status === 'active';
+	return (
+		<Container>
+			<div className={isActive ? 'active' : 'disabled'}>
+				{isActive ? ' ativo' : 'inativo'}
+			</div>
+		</Container>
+	);
 }

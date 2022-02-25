@@ -11,12 +11,15 @@ margin 0 auto;
 export const Content = styled.div`
 	margin: 0 auto;
 	background: var(--white);
-	height: 700px;
-	width: 780.5px;
-	overflow: hidden;
 	box-shadow: 0px 4px 8px rgba(165, 171, 179, 0.16);
 	border-radius: 8px;
+	width: 780.5px;
 	padding: 40px 24px;
+	height: 770px;
+	.contentOverflow {
+		height: 680px;
+		overflow: hidden;
+	}
 `;
 
 export const TextContainer = styled.div`

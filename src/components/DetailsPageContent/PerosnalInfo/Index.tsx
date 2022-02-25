@@ -2,14 +2,27 @@ import React from 'react';
 import { CardContainer, Container } from './Style';
 import PersonalInfoItem from './PersonalInfoItem/Index';
 
-export default function PersonalInfo() {
+interface PersonalInfoItemProps {
+	phone: { ddd: string; ddi: string; number: string };
+	birth_date: string;
+	document: { type: string; number: string };
+}
+
+export default function PersonalInfo({
+	phone,
+	birth_date,
+	document,
+}: PersonalInfoItemProps) {
 	return (
 		<Container>
 			<p className='headText'>Informações pessoais</p>
 			<CardContainer>
-				<PersonalInfoItem text='CPF' data='60118976060' />
-				<PersonalInfoItem text='Telefone' data='+55 89 26355467' />
-				<PersonalInfoItem text='Nascimento' data='29/11/1990' />
+				<PersonalInfoItem text={document.type} data={document.number} />
+				<PersonalInfoItem
+					text='Telefone'
+					data={`+${phone.ddi} ${phone.ddd} ${phone.number}`}
+				/>
+				<PersonalInfoItem text='Nascimento' date={birth_date} />
 			</CardContainer>
 		</Container>
 	);

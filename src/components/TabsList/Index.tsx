@@ -21,6 +21,10 @@ import SearchBar from '../SearchBar';
 import UserList from '../UserList/Index';
 import TableAvatar from '../UserList/TableAvatar/index';
 import { FiMoreVertical } from 'react-icons/fi';
+import { RolesList } from '../RolesList/index';
+import Active from '../Active/Index';
+import { Container } from './Style';
+import { useRouter } from 'next/router';
 
 interface Item {
 	agent_id: number;
@@ -37,33 +41,8 @@ interface TabsListProps {
 }
 
 export default function TabsList({ onFormSubmit, agents }: TabsListProps) {
-	const renderingUserlist = agents.map(agent => {
-		return (
-			<Tbody key={agent.agent_id}>
-				<Tr color='brand.300'>
-					<Td>
-						<Box py='4'>
-							<TableAvatar name={agent.name} src={agent.image} />
-						</Box>
-					</Td>
-					<Td>
-						<Text>{agent.department}</Text>
-					</Td>
-					<Td>{agent.role}</Td>
-					<Td>{agent.branch}</Td>
-					<Td>
-						<Text>{agent.status}</Text>
-					</Td>
-					<Td>
-						<FiMoreVertical />
-					</Td>
-				</Tr>
-			</Tbody>
-		);
-	});
-
 	return (
-		<>
+		<Container>
 			<Tabs>
 				<TabList color='brand.400'>
 					<Tab>Colaboradores</Tab>
@@ -73,14 +52,17 @@ export default function TabsList({ onFormSubmit, agents }: TabsListProps) {
 				<TabPanels>
 					<TabPanel>
 						<SearchBar searchText='Nome ou CPF' onFormSubmit={onFormSubmit} />
-						<UserList renderingUserlist={renderingUserlist} />
-						<Pagination />
+						<div>
+							<UserList agents={agents} />
+							<Pagination />
+						</div>
 					</TabPanel>
 					<TabPanel>
 						<SearchBar searchText='Cargos' onFormSubmit={onFormSubmit} />
+						<RolesList />
 					</TabPanel>
 				</TabPanels>
 			</Tabs>
-		</>
+		</Container>
 	);
 }
