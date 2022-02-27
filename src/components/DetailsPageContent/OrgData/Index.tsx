@@ -21,7 +21,7 @@ export default function OrgData({
 				<OrgDataBar typeOfBar='Departamento' textOfOrgBar={department} />
 				<OrgDataBar typeOfBar='Cargo' textOfOrgBar={role} />
 				<OrgDataBar typeOfBar='Unidade' textOfOrgBar={branch} />
-				<OrgDataBar typeOfBar='Status' textOfOrgBar={status} />
+				<OrgDataBar typeOfBar='Status' textOfOrgBar='ativo' />
 			</div>
 		</Container>
 	);

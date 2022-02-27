@@ -16,6 +16,7 @@ import { useRouter } from 'next/router';
 import TableAvatar from './TableAvatar/index';
 import Active from '../Active/Index';
 import Link from 'next/link';
+import { ReactChild, useState } from 'react';
 
 interface Item {
 	agent_id: number;
@@ -29,39 +30,11 @@ interface Item {
 
 interface UserListProps {
 	agents: Item[];
+	userListRender: JSX.Element[];
 }
 
-export default function UserList({ agents }: UserListProps) {
+export default function UserList({ agents, userListRender }: UserListProps) {
 	const router = useRouter();
-
-	const renderingUserlist = agents.map(agent => {
-		const isOpaque = agent.status === 'active';
-
-		return (
-			<Tr color='brand.300' key={agent.agent_id}>
-				<Td>
-					<Box py='4' opacity={isOpaque ? 'none' : '0.6'}>
-						<TableAvatar name={agent.name} src={agent.image} />
-					</Box>
-				</Td>
-				<Td opacity={isOpaque ? 'none' : '0.6'}>
-					<Text>{agent.department}</Text>
-				</Td>
-				<Td opacity={isOpaque ? 'none' : '0.6'}>{agent.role}</Td>
-				<Td opacity={isOpaque ? 'none' : '0.6'}>{agent.branch}</Td>
-				<Td>
-					<Text>
-						<Active status={agent.status} />
-					</Text>
-				</Td>
-				<Td>
-					<Link href={`/details`} passHref>
-						<FiMoreVertical />
-					</Link>
-				</Td>
-			</Tr>
-		);
-	});
 
 	//
 	return (
@@ -84,7 +57,7 @@ export default function UserList({ agents }: UserListProps) {
 							<Th>Status</Th>
 						</Tr>
 					</Thead>
-					<Tbody>{renderingUserlist}</Tbody>
+					<Tbody>{userListRender}</Tbody>
 				</Table>
 			</Box>
 		</Container>

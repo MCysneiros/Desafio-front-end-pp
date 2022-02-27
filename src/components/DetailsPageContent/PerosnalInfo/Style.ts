@@ -15,4 +15,8 @@ export const CardContainer = styled.div`
 	display: flex;
 	align-items: space-between;
 	gap: 20px;
+	@media (max-width: 720px) {
+		flex-direction: column;
+		align-items: center;
+	}
 `;

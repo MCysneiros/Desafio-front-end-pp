@@ -4,14 +4,17 @@ import { FormEvent, useState } from 'react';
 
 interface searchBarProps {
 	searchText: string;
-	onFormSubmit: (event: FormEvent) => void;
 }
 
-export default function SearchBar({
-	searchText,
-	onFormSubmit,
-}: searchBarProps) {
+export default function SearchBar({ searchText }: searchBarProps) {
 	const [search, setSearch] = useState('');
+	const [term, setTerm] = useState('');
+
+	const onFormSubmit = (event: FormEvent) => {
+		event.preventDefault();
+		setTerm(search);
+		console.log(term);
+	};
 
 	return (
 		<Container>

@@ -8,6 +8,10 @@ export const Container = styled.div`
 	background: #f5faf8;
 	border-radius: 8px;
 	border: 2px solid #cad6d1;
+
+	@media (max-width: 720px) {
+		width: 100%;
+	}
 	.infoCardContainer {
 		align-items: center;
 		display: flex;

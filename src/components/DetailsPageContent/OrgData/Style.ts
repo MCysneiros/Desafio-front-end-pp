@@ -13,5 +13,10 @@ export const Container = styled.div`
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		gap: 0 24px;
+
+		@media (max-width: 720px) {
+			display: flex;
+			flex-direction: column;
+		}
 	}
 `;

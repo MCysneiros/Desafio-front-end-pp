@@ -5,6 +5,8 @@ import { Container } from './Style';
 import { useEffect, useState } from 'react';
 import { api } from '../../services/api';
 import Link from 'next/link';
+import useMatchMedia from '../../hooks/useWindowSize';
+import { RoleListModal } from '../RoleListModal/index';
 
 export const RolesList = () => {
 	const router = useRouter();
@@ -21,13 +23,13 @@ export const RolesList = () => {
 
 	console.log(roles);
 
-	const renderRoles = roles?.map(role => {
-		let i = 1;
+	const isMobile = useMatchMedia('(min-width:1200px)', true);
+	const renderRoles = roles?.map((role, index) => {
 		return (
-			<Tbody key={role.departament}>
+			<Tbody key={index}>
 				<Tr color='brand.300'>
 					<Td>
-						<Box py='2'>
+						<Box py='1'>
 							<Text className='roleText'>{role.name}</Text>
 						</Box>
 					</Td>
@@ -39,7 +41,7 @@ export const RolesList = () => {
 					</Td>
 					<Td>
 						<Link href='/role' passHref>
-							<FiMoreVertical />
+							<RoleListModal />
 						</Link>
 					</Td>
 				</Tr>

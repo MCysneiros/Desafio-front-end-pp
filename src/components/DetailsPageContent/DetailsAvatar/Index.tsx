@@ -7,7 +7,11 @@ interface DetailsAvatarProps {
 	image: string;
 }
 
-export default function DetailsAvatar({ name, email, image }) {
+export default function DetailsAvatar({
+	name,
+	email,
+	image,
+}: DetailsAvatarProps) {
 	return (
 		<Container>
 			<div className='avatarIcon'>

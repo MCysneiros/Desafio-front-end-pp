@@ -28,7 +28,17 @@ export default function PersonalInfoItem({
 				<div className='infoCardText'>
 					<span>{text}</span>
 
-					{data ? <p>{data}</p> : <p>{date}</p>}
+					{data ? (
+						<p>{data}</p>
+					) : (
+						<p>
+							{new Date(date).toLocaleDateString('pt-br', {
+								day: '2-digit',
+								month: 'numeric',
+								year: 'numeric',
+							})}
+						</p>
+					)}
 				</div>
 			</div>
 		</Container>

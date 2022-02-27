@@ -6,6 +6,10 @@ import { useRouter } from 'next/router';
 import DetailsPageContent from '../DetailsPageContent/Index';
 import Pagination from '../Pagination/Index';
 import { RolesPageContent } from '../RolesPageContent/Index';
+import { RightPagination } from '../Pagination/RightPagination';
+import useMatchMedia from '../../hooks/useWindowSize';
+import { MobileUserList } from '../mobileUserList/Index';
+import { MobileModal } from '../MenuModal/Index';
 
 interface Item {
 	agent_id: number;
@@ -73,32 +77,58 @@ export default function MainSpace({
 		e.preventDefault();
 		router.push('/');
 	};
-
+	const isMobile = useMatchMedia('(min-width:480px)', true);
 	return (
 		<Container>
-			<TextContainer>
-				{hasIcon && (
-					<div onClick={handleClick} className='iconContainer'>
-						<FiArrowLeft />
-					</div>
-				)}
-				<h1>{text}</h1>
-			</TextContainer>
-			<Content>
-				{hasTabs && (
-					<div>
-						<div className='contentOverflow'>
-							<TabsList agents={agents} onFormSubmit={onFormSubmit}></TabsList>
-						</div>
-						<Pagination />
-					</div>
-				)}
-				{text === 'Detalhes do Colaborador' && (
-					<DetailsPageContent agentData={agentData} />
-				)}
+			{isMobile ? (
+				<>
+					<TextContainer>
+						{hasIcon && (
+							<div onClick={handleClick} className='iconContainer'>
+								<FiArrowLeft />
+							</div>
+						)}
+						<h1>{text}</h1>
+					</TextContainer>
+					<Content>
+						{hasTabs && (
+							<div>
+								<div className='contentOverflow'>
+									<TabsList agents={agents}></TabsList>
+								</div>
+							</div>
+						)}
+						{text === 'Detalhes do Colaborador' && (
+							<DetailsPageContent agentData={agentData} />
+						)}
 
-				{isRoles && <RolesPageContent roleData={roleData} />}
-			</Content>
+						{isRoles && <RolesPageContent roleData={roleData} />}
+					</Content>
+				</>
+			) : (
+				<Content>
+					{hasIcon ? (
+						<>
+							<TextContainer>
+								<div onClick={handleClick} className='iconContainer'>
+									<FiArrowLeft />
+								</div>
+								<h2 className='iconH2'>{text}</h2>
+							</TextContainer>
+							{text === 'Detalhes do Colaborador' && (
+								<DetailsPageContent agentData={agentData} />
+							)}
+
+							{isRoles && <RolesPageContent roleData={roleData} />}
+						</>
+					) : (
+						<>
+							<h2>Colaboradores</h2>
+							<MobileUserList agents={agents} text={text} />
+						</>
+					)}
+				</Content>
+			)}
 		</Container>
 	);
 }

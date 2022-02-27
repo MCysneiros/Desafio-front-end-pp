@@ -24,7 +24,7 @@ export const Container = styled.div`
 		p {
 			font-size: 16px;
 			line-height: 24px;
-			color: var(--text-dark);
+			color: var(--text);
 			font-weight: 500;
 		}
 	}

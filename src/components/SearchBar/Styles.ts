@@ -30,7 +30,12 @@ export const Content = styled.form`
 		width: 600px;
 		outline: none;
 		&::placeholder {
-			color: var(--text-dark);
+			color: var(--text);
+			font-weight: 500;
+			font-size: 16px;
+		}
+		@media (max-width: 720px) {
+			width: 260px;
 		}
 	}
 	svg {

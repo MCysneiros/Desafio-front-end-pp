@@ -80,7 +80,7 @@ export const RolesPageContent = ({ roleData }: RolePageContent) => {
 					<Thead>
 						<Tr color='brand.300'>
 							<Th>
-								<Box py='2px' mr={60}>
+								<Box py='4' mr={[0, 80]}>
 									Cargo
 								</Box>
 							</Th>

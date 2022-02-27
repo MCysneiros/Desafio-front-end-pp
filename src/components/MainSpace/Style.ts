@@ -13,12 +13,27 @@ export const Content = styled.div`
 	background: var(--white);
 	box-shadow: 0px 4px 8px rgba(165, 171, 179, 0.16);
 	border-radius: 8px;
-	width: 780.5px;
+
+	max-width: 780.5px;
 	padding: 40px 24px;
 	height: 770px;
-	.contentOverflow {
-		height: 680px;
-		overflow: hidden;
+
+	.pagination {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+	@media (max-width: 720px) {
+		border-radius: 0;
+		width: 100vw;
+		padding: 40px 10px 0;
+		height: auto;
+		h2 {
+			font-size: 24px;
+			margin-bottom: 24px;
+			margin-left: 16px;
+			color: var(--text-dark);
+		}
 	}
 `;
 
@@ -28,6 +43,16 @@ export const TextContainer = styled.div`
 	margin-bottom: 16px;
 	align-items: center;
 
+	@media (max-width: 720px) {
+		align-items: flex-start;
+	}
+	}
+
+	.iconH2 {
+		font-weight: 600;
+		font-size: 20px;
+		color: #465953;
+	}
 	.iconContainer {
 		width: 36px;
 		height: 36px;
@@ -38,7 +63,10 @@ export const TextContainer = styled.div`
 		border-radius: 50%;
 		margin-right: 16px;
 		cursor: pointer;
-		trasition: all 0.2s;
+		transition: all 0.2s;
+		@media (max-width: 720px) {
+			margin-right: 0;
+		}
 		&:hover {
 			transform: scale(1.1);
 		}

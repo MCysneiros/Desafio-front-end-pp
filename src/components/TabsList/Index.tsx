@@ -15,16 +15,18 @@ import {
 	Tr,
 	WrapItemProps,
 } from '@chakra-ui/react';
-import { FormEvent } from 'react';
-import Pagination from '../Pagination/Index';
+import { FormEvent, useState } from 'react';
 import SearchBar from '../SearchBar';
 import UserList from '../UserList/Index';
-import TableAvatar from '../UserList/TableAvatar/index';
-import { FiMoreVertical } from 'react-icons/fi';
 import { RolesList } from '../RolesList/index';
-import Active from '../Active/Index';
 import { Container } from './Style';
-import { useRouter } from 'next/router';
+import TableAvatar from '../UserList/TableAvatar';
+import Active from '../Active/Index';
+import { FiMoreVertical } from 'react-icons/fi';
+import Link from 'next/link';
+import Pagination from '../Pagination/Index';
+import { RightPagination } from '../Pagination/RightPagination';
+import { UserListModal } from '../UserListModal/Index';
 
 interface Item {
 	agent_id: number;
@@ -36,11 +38,47 @@ interface Item {
 	status: string;
 }
 interface TabsListProps {
-	onFormSubmit: (event: FormEvent) => void;
 	agents: Item[];
 }
 
-export default function TabsList({ onFormSubmit, agents }: TabsListProps) {
+export default function TabsList({ agents }: TabsListProps) {
+	const [currentPage, setCurrentPage] = useState(1);
+	const [itemsPerPage, setItemsPerPage] = useState(5);
+
+	const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+	const indexOfLastItem = currentPage * itemsPerPage;
+	const indexOfFirstPost = indexOfLastItem - itemsPerPage;
+	const currentItems = agents.slice(indexOfFirstPost, indexOfLastItem);
+
+	const userListRender = currentItems.map(agent => {
+		const isOpaque = agent.status === 'active';
+
+		return (
+			<Tr color='brand.300' key={agent.agent_id}>
+				<Td>
+					<Box py='2' opacity={isOpaque ? 'none' : '0.6'}>
+						<TableAvatar name={agent.name} src={agent.image} />
+					</Box>
+				</Td>
+				<Td opacity={isOpaque ? 'none' : '0.6'}>
+					<Text>{agent.department}</Text>
+				</Td>
+				<Td opacity={isOpaque ? 'none' : '0.6'}>{agent.role}</Td>
+				<Td opacity={isOpaque ? 'none' : '0.6'}>{agent.branch}</Td>
+				<Td>
+					<Text>
+						<Active status={agent.status} />
+					</Text>
+				</Td>
+				<Td>
+					<Link href={`/details`} passHref>
+						<UserListModal />
+					</Link>
+				</Td>
+			</Tr>
+		);
+	});
+
 	return (
 		<Container>
 			<Tabs>
@@ -51,15 +89,34 @@ export default function TabsList({ onFormSubmit, agents }: TabsListProps) {
 
 				<TabPanels>
 					<TabPanel>
-						<SearchBar searchText='Nome ou CPF' onFormSubmit={onFormSubmit} />
+						<SearchBar searchText='Nome ou CPF' />
 						<div>
-							<UserList agents={agents} />
-							<Pagination />
+							<UserList agents={agents} userListRender={userListRender} />
+							<div className='pagination'>
+								<Pagination
+									pageNumber={currentItems.length}
+									total={agents.length}
+								/>
+								<RightPagination
+									postPerPage={itemsPerPage}
+									totalPost={agents.length}
+									paginate={paginate}
+									pageIndex={currentItems.length}
+								/>
+							</div>
 						</div>
 					</TabPanel>
 					<TabPanel>
-						<SearchBar searchText='Cargos' onFormSubmit={onFormSubmit} />
+						<SearchBar searchText='Cargos' />
 						<RolesList />
+						<div className='rolePagination'>
+							<RightPagination
+								postPerPage={itemsPerPage}
+								totalPost={agents.length}
+								paginate={paginate}
+								pageIndex={currentItems.length}
+							/>
+						</div>
 					</TabPanel>
 				</TabPanels>
 			</Tabs>

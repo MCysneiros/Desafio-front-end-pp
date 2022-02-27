@@ -7,6 +7,11 @@ export const Container = styled.div`
 		gap: 0 24px;
 		margin-bottom: 60px;
 
+		@media (max-width: 768px) {
+			display: flex;
+			flex-direction: column;
+		}
+
 		h3 {
 			margin: 40px 0 20px;
 			color: var(--text-dark);

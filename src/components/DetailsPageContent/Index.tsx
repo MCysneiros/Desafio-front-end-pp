@@ -1,4 +1,5 @@
 import React from 'react';
+import useMatchMedia from '../../hooks/useWindowSize';
 import DetailsAvatar from './DetailsAvatar/Index';
 import OrgData from './OrgData/Index';
 import PersonalInfo from './PerosnalInfo/Index';
@@ -23,8 +24,6 @@ interface DetailsPageProps {
 }
 
 export default function DetailsPageContent({ agentData }: DetailsPageProps) {
-	const isActive = agentData.status === 'active' ? 'Ativo' : 'Inativo';
-	console.log(agentData.email, 'oi');
 	return (
 		<Container>
 			<DetailsAvatar
@@ -39,7 +38,7 @@ export default function DetailsPageContent({ agentData }: DetailsPageProps) {
 			/>
 			<OrgData
 				role={agentData.role}
-				status={isActive}
+				status={'ativo'}
 				department={agentData.department}
 				branch={agentData.branch}
 			/>
